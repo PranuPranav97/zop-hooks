@@ -21,4 +21,4 @@ function useScreenSize() {
   return screenSize;
 }
 
-export default useScreenSize;
+export { useScreenSize };
