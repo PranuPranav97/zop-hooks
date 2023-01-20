@@ -1,6 +1,4 @@
 src/*
 src
-travis.yml
-README.md
 rollup.config.js
 tsconfig.*json
