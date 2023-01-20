@@ -1,10 +1,10 @@
 {
-  "name": "react-custom-hooks",
+  "name": "zop-hooks",
   "version": "1.0.0",
   "description": "",
   "author": "PranuPranav97",
   "license": "MIT",
-  "repository": "PranuPranav97/react-custom-hooks",
+  "repository": "https://github.com/PranuPranav97/zop-hooks",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
