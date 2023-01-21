@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+//Export this interface
 interface Geolocation {
   latitude: number;
   longitude: number;
