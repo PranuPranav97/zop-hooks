@@ -18,8 +18,10 @@ jobs:
           node-version: "lts/*"
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Build the Package
-        run: yarn build
+      # - name: Build the Package
+      #   run: yarn build
+      - name: Authenticate with NPMJS
+        run: npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
