@@ -20,8 +20,10 @@ jobs:
         run: yarn install --frozen-lockfile
       # - name: Build the Package
       #   run: yarn build
-      - name: Authenticate with NPMJS
+      - name: Set NPM Registry Config
         run: npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+      - name: Authenticate with NPMJS
+        run: npm login --registry=https://registry.npmjs.org
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
