@@ -2,3 +2,5 @@ src/*
 src
 rollup.config.js
 tsconfig.*json
+.github
+.github/*
