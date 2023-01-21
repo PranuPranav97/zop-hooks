@@ -25,7 +25,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
       - name: Authenticate with NPMJS
-        run: npm login --registry=https://registry.npmjs.org
+        run: npm login --registry=https://registry.npmjs.org --verbose
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
