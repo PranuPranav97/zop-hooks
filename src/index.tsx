@@ -4,7 +4,7 @@ export * from "./hooks/use-key-press/useKeyPress";
 export * from "./hooks/use-online-status/useOnlineStatus";
 export * from "./hooks/use-screen-size/useScreenSize";
 export * from "./hooks/use-clipboard/useClipboard";
-export * from "./hooks/use-device-type/useDeviceTyp";
+export * from "./hooks/use-device-type/useDeviceType";
 export * from "./hooks/use-geo-location/useGeoLocation";
 export * from "./hooks/use-page-timer/usePageTimer";
 export * from "./hooks/use-screen-brightness/useScreenBrightness";
