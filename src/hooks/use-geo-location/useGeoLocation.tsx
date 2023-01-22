@@ -33,3 +33,4 @@ function useGeolocation(): Geolocation | undefined {
 }
 
 export { useGeolocation };
+export type { Geolocation };
