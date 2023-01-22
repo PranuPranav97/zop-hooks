@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 
-//TODO device type enum
+enum DeviceType {
+  Android = "Android",
+  WebOs = "webOS",
+  Iphone = "iPhone",
+  Ipad = "iPad",
+  Ipod = "iPod",
+  BlackBerry = "BlackBerry",
+  WindowsPhone = "Windows Phone",
+  Desktop = "Desktop",
+}
 
 function useDeviceType(): string {
   const [deviceType, setDeviceType] = useState<string>("");
@@ -8,25 +17,25 @@ function useDeviceType(): string {
   useEffect(() => {
     const userAgent = navigator.userAgent;
     if (userAgent.match(/Android/i)) {
-      setDeviceType("Android");
+      setDeviceType(DeviceType.Android);
     } else if (userAgent.match(/webOS/i)) {
-      setDeviceType("webOS");
+      setDeviceType(DeviceType.WebOs);
     } else if (userAgent.match(/iPhone/i)) {
-      setDeviceType("iPhone");
+      setDeviceType(DeviceType.Iphone);
     } else if (userAgent.match(/iPad/i)) {
-      setDeviceType("iPad");
+      setDeviceType(DeviceType.Ipad);
     } else if (userAgent.match(/iPod/i)) {
-      setDeviceType("iPod");
+      setDeviceType(DeviceType.Ipod);
     } else if (userAgent.match(/BlackBerry/i)) {
-      setDeviceType("BlackBerry");
+      setDeviceType(DeviceType.BlackBerry);
     } else if (userAgent.match(/Windows Phone/i)) {
-      setDeviceType("Windows Phone");
+      setDeviceType(DeviceType.WindowsPhone);
     } else {
-      setDeviceType("Desktop");
+      setDeviceType(DeviceType.Desktop);
     }
   }, []);
 
   return deviceType;
 }
 
-export { useDeviceType };
+export { useDeviceType, DeviceType };
