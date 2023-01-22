@@ -61,7 +61,7 @@
     "@types/babel__traverse": "7.0.6"
   },
   "release": {
-    "repositoryUrl": "https://github.com/PranuPranav97/zop-hooks",
+    "repositoryUrl": "https://github.com/PranuPranav97/zop-hooks.git",
     "branches": [
       "main"
     ],
