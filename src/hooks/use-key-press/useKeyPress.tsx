@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { KeyboardCharacter } from "../../types/useKeyPress";
 
-function useKeyPress(targetKey: any) {
+function useKeyPress(targetKey: KeyboardCharacter) {
   const [keyPressed, setKeyPressed] = useState(false);
 
   useEffect(() => {

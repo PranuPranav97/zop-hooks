@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-//Export this interface
-interface Geolocation {
-  latitude: number;
-  longitude: number;
-  accuracy: number;
-  timestamp: number;
-}
+import { Geolocation } from "../../types/useGeoLocation";
 
 function useGeolocation(): Geolocation | undefined {
   const [geolocation, setGeolocation] = useState<Geolocation | undefined>();
