@@ -10,3 +10,4 @@ export * from "./hooks/use-page-timer/usePageTimer";
 export * from "./hooks/use-screen-brightness/useScreenBrightness";
 export * from "./hooks/use-screen-orientation/useScreenOrientation";
 export * from "./hooks/use-scroll-position/useScrollPosition";
+export * from "./hooks/use-timer";
