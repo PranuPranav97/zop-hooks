@@ -1,3 +1,4 @@
+//Hooks
 export * from "./hooks/use-window-scroll/useWindowScroll";
 export * from "./hooks/use-mouse-position/useMousePosition";
 export * from "./hooks/use-key-press/useKeyPress";
@@ -11,3 +12,7 @@ export * from "./hooks/use-screen-brightness/useScreenBrightness";
 export * from "./hooks/use-screen-orientation/useScreenOrientation";
 export * from "./hooks/use-scroll-position/useScrollPosition";
 export * from "./hooks/use-timer";
+
+//Types
+export * from "./types/useGeoLocation";
+export * from "./types/useKeyPress";
