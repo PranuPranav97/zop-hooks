@@ -58,4 +58,4 @@ const useTimer = (initialTime = 0): Timer => {
   };
 };
 
-export default useTimer;
+export { useTimer };
