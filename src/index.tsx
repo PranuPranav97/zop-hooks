@@ -14,6 +14,6 @@ export * from "./hooks/use-scroll-position/useScrollPosition";
 export * from "./hooks/use-timer";
 export * from "./hooks/use-count-down-timer/useCountDownTimer";
 
-//Types
+//Types which can be used by the user.
 export * from "./types/useGeoLocation";
 export * from "./types/useKeyPress";
