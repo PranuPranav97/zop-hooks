@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface CountdownTimerProps {
   duration: number;
+  dependencies?: any[];
 }
 
-const useCountdownTimer = ({ duration }: CountdownTimerProps) => {
+const useCountdownTimer = ({ duration, dependencies }: CountdownTimerProps) => {
   const [remainingTime, setRemainingTime] = useState(duration);
+
+  useEffect(() => {
+    setRemainingTime(duration);
+  }, [duration, ...(dependencies || [])]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -16,7 +21,7 @@ const useCountdownTimer = ({ duration }: CountdownTimerProps) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [remainingTime]);
 
   const formatTime = (time: number): string => {
     const hours = Math.floor(time / 3600);
@@ -33,7 +38,11 @@ const useCountdownTimer = ({ duration }: CountdownTimerProps) => {
 
   const formattedTime = formatTime(remainingTime);
 
-  return { remainingTime, formattedTime };
+  const restartTimer = useCallback(() => {
+    setRemainingTime(duration);
+  }, [duration]);
+
+  return { remainingTime, formattedTime, restartTimer };
 };
 
 export { useCountdownTimer };
