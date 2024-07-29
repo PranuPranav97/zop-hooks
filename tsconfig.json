@@ -12,5 +12,13 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "build", "dist", "example", "webpack.config.js", ".github", ]
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "example",
+    "webpack.config.js",
+    ".github",
+    ".babelrc"
+  ]
 }
