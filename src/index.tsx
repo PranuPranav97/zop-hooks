@@ -11,7 +11,7 @@ export * from "./hooks/use-page-timer/usePageTimer";
 export * from "./hooks/use-screen-brightness/useScreenBrightness";
 export * from "./hooks/use-screen-orientation/useScreenOrientation";
 export * from "./hooks/use-scroll-position/useScrollPosition";
-export * from "./hooks/use-timer";
+export * from "./hooks/use-timer/useTimer";
 export * from "./hooks/use-count-down-timer/useCountdownTimer";
 
 //Types which can be used by the user.
