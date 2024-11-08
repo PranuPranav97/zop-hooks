@@ -13,6 +13,7 @@ export * from "./hooks/use-screen-orientation/useScreenOrientation";
 export * from "./hooks/use-scroll-position/useScrollPosition";
 export * from "./hooks/use-timer/useTimer";
 export * from "./hooks/use-count-down-timer/useCountdownTimer";
+export * from "./hooks/use-shortcuts/useShortcuts";
 
 //Types which can be used by the user.
 export * from "./types/useGeoLocation";
