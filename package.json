@@ -9,9 +9,7 @@
     "url": "https://github.com/PranuPranav97/zop-hooks.git"
   },
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
-  "jsnext:main": "dist/index.es.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
