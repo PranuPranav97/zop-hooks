@@ -1,16 +1,18 @@
 import { useEffect, useRef } from "react";
 import { KeyCombination, ShortcutCallback } from "../../types/useShortcuts";
 
-const useShortcuts = (keys: KeyCombination, callback: ShortcutCallback) => {
-  // Use a Set to track keys currently pressed
-  const pressedKeys = useRef(new Set<string>());
+export const useShortcuts = (
+  keys: KeyCombination,
+  callback: ShortcutCallback
+) => {
+  const pressedKeys = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Add the pressed key to the Set
+      // Add the current key to the Set
       pressedKeys.current.add(event.key.toLowerCase());
 
-      // Check if all specified keys are pressed
+      // Check if all keys in the combination are currently pressed
       const isMatch = keys.every((key) =>
         pressedKeys.current.has(key.toLowerCase())
       );
@@ -18,6 +20,8 @@ const useShortcuts = (keys: KeyCombination, callback: ShortcutCallback) => {
       if (isMatch) {
         event.preventDefault();
         callback();
+        // Clear pressed keys after triggering the callback
+        pressedKeys.current.clear();
       }
     };
 
@@ -29,14 +33,13 @@ const useShortcuts = (keys: KeyCombination, callback: ShortcutCallback) => {
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
 
-    // Cleanup event listeners on component unmount
+    // Cleanup on unmount
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
+      pressedKeys.current.clear();
     };
   }, [keys, callback]);
 
   return null;
 };
-
-export { useShortcuts as useShortcut };
