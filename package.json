@@ -17,7 +17,7 @@
     "npm": ">=5"
   },
   "scripts": {
-    "test": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test": "jest",
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c && tsc -d --emitDeclarationOnly --noEmit false --declarationDir dist",
     "start": "rollup -c -w",
@@ -26,10 +26,10 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
-  "dependencies": {
-    "react": "16.9.0"
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^16.9.0 || ^17.0.0 || ^18.0.0"
   },
-  "peerDependencies": {},
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/runtime": "^7.3.1",
@@ -43,12 +43,15 @@
     "@semantic-release/github": "^8.0.7",
     "@semantic-release/npm": "^9.0.2",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^23.3.13",
     "@types/react": "^16.7.22",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "react-scripts": "^3.4.0",
+    "react-test-renderer": "^18.3.1",
     "rollup": "^2.26.9",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "semantic-release": "^17.4.7",
@@ -78,5 +81,14 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "setupFilesAfterEnv": [
+      "@testing-library/react-hooks/dont-cleanup-after-each"
+    ]
   }
 }
