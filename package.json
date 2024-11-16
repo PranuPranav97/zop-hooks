@@ -8,11 +8,19 @@
     "type": "git",
     "url": "https://github.com/PranuPranav97/zop-hooks.git"
   },
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
   },
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
@@ -21,7 +29,7 @@
     "publish": "semantic-release",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
-    "build": "webpack && tsc"
+    "build": "tsc && webpack"
   },
   "dependencies": {
     "react": "^16.9.0"
