@@ -1,51 +1,54 @@
-import { renderHook } from "@testing-library/react-hooks";
-import { useClipboard } from "../hooks/use-clipboard/useClipboard";
+import { renderHook } from "@testing-library/react";
+import { waitFor } from "@testing-library/dom";
+import { useClipboard } from "../";
 
 describe("useClipboard", () => {
-  beforeAll(() => {
-    // Mock the clipboard API
-    global.navigator.clipboard = {
-      readText: jest.fn(),
-    };
+  beforeEach(() => {
+    // Reset mocks before each test
+    jest.resetAllMocks();
   });
 
-  it("should return undefined initially", () => {
+  it("should read and return clipboard content", async () => {
+    const mockClipboardContent = "Test clipboard data";
+
+    // Mock the clipboard API
+    Object.assign(navigator, {
+      clipboard: {
+        readText: jest.fn().mockResolvedValue(mockClipboardContent),
+      },
+    });
+
     const { result } = renderHook(() => useClipboard());
 
-    // Initially, clipboard content should be undefined
-    expect(result.current).toBeUndefined();
+    await waitFor(() => {
+      expect(result.current).toBe(mockClipboardContent);
+    });
+
+    expect(navigator.clipboard.readText).toHaveBeenCalledTimes(1);
   });
 
-  it("should fetch clipboard content successfully", async () => {
-    // Mock the clipboard content
-    const mockClipboardContent = "This is some text";
-    navigator.clipboard.readText.mockResolvedValue(mockClipboardContent);
+  it("should handle clipboard read failure gracefully", async () => {
+    const mockError = new Error("Clipboard read failed");
 
-    const { result, waitForNextUpdate } = renderHook(() => useClipboard());
+    Object.assign(navigator, {
+      clipboard: {
+        readText: jest.fn().mockRejectedValue(mockError),
+      },
+    });
 
-    // Wait for the update after clipboard content is fetched
-    await waitForNextUpdate();
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
 
-    // Check if clipboard content is set correctly
-    expect(result.current).toBe(mockClipboardContent);
-  });
+    const { result } = renderHook(() => useClipboard());
 
-  it("should handle errors when fetching clipboard content", async () => {
-    // Mock an error while fetching clipboard content
-    navigator.clipboard.readText.mockRejectedValue(
-      new Error("Clipboard access denied")
-    );
+    await waitFor(() => {
+      expect(result.current).toBeUndefined();
+    });
 
-    const { result, waitForNextUpdate } = renderHook(() => useClipboard());
+    expect(navigator.clipboard.readText).toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(mockError);
 
-    // Wait for the update after an error occurs
-    await waitForNextUpdate();
-
-    // Ensure the state is still undefined (no content retrieved)
-    expect(result.current).toBeUndefined();
-  });
-
-  afterAll(() => {
-    jest.restoreAllMocks();
+    consoleErrorSpy.mockRestore();
   });
 });

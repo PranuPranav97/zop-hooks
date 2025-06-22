@@ -1,35 +1,37 @@
 name: Release
+
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Test"]
+    types:
+      - completed
+
 jobs:
   release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
     name: Release
+
     permissions:
       contents: write
       issues: write
       pull-requests: write
-    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
+          cache: yarn
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      # - name: Build the Package
-      #   run: yarn build
-      # - name: Set NPM Registry Config
-      #   env:
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
-      # - name: Authenticate with NPMJS
-      #   run: npm login --registry=https://registry.npmjs.org/ --verbose
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
